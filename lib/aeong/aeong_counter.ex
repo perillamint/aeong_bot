@@ -2,6 +2,7 @@ defmodule AeongBot.Aeong.AeongCounter do
   use GenServer
   use Amnesia
   alias AeongBot.Mnesia.Aeong.AeongCount, as: AeongCount
+  alias AeongBot.Aeong.AeongAction, as: AeongAction
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, [args], [{:name, __MODULE__}])
@@ -16,9 +17,7 @@ defmodule AeongBot.Aeong.AeongCounter do
   end
 
   def handle_cast(aeong, state) do
-    IO.inspect(aeong)
-
-    Amnesia.transaction do
+    aeong = Amnesia.transaction do
       aeong = case AeongCount.read(aeong.user_id) do
                 nil ->
                   %AeongCount{
@@ -34,6 +33,8 @@ defmodule AeongBot.Aeong.AeongCounter do
 
       AeongCount.write(aeong)
     end
+
+    GenServer.cast(AeongAction, aeong)
 
     {:noreply, state}
   end

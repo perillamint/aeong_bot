@@ -21,6 +21,9 @@ defmodule AeongBot do
       twitter_stream: %{
         filter_user: ~r/(IfElse__|perillamint)/,
         filter_keyword: ~r/애옹/
+      },
+      aeong_action: %{
+        celebrate_nth: 1
       }
     }
 
