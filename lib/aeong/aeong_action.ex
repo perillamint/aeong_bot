@@ -19,7 +19,7 @@ defmodule AeongBot.Aeong.AeongAction do
 
   def handle_cast(aeong, state) do
     if 0 == rem(aeong.count, state.celebrate_nth) do
-      msg = "@" <> aeong.screen_name <> " " <> Integer.to_string(aeong.count) <> "번째 애옹"
+      msg = "@" <> aeong.screen_name <> " " <> Integer.to_string(aeong.count) <> "번째 애옹" <> UUID.uuid4()
       ExTwitter.update(msg)
     end
 
