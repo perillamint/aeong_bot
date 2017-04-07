@@ -31,6 +31,7 @@ defmodule AeongBot.Mixfile do
   defp deps do
     [{:extwitter, "~> 0.8.3"},
      {:html_entities, "~> 0.3"},
-     {:amnesia, "~> 0.2.7"}]
+     {:amnesia, "~> 0.2.7"},
+     {:uuid, "~> 1.1"}]
   end
 end
