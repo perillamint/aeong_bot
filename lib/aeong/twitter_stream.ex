@@ -1,5 +1,6 @@
 defmodule AeongBot.Aeong.TwitterStream do
   use GenServer
+  alias AeongBot.Aeong.AeongCounter, as: AeongCounter
   alias ExTwitter.Model.Tweet, as: Tweet
   alias ExTwitter.Model.User, as: User
 
@@ -17,7 +18,7 @@ defmodule AeongBot.Aeong.TwitterStream do
   end
 
   def start_link(args) do
-    GenServer.start_link(__MODULE__, [args], [])
+    GenServer.start_link(__MODULE__, [args], [{:name, __MODULE__}])
   end
 
   def init([config]) do
@@ -74,7 +75,17 @@ defmodule AeongBot.Aeong.TwitterStream do
     # Filter out users and keyworkds
     if Regex.match?(state.filter_user, screen_name) &&
       Regex.match?(state.filter_keyword, text) do
-      IO.puts("Aeong")
+      {user_id_num, ""} = Integer.parse(user_id)
+      {tweet_id_num, ""} = Integer.parse(tweet_id)
+
+      payload = %{
+            text: text,
+            screen_name: screen_name,
+            user_id: user_id_num,
+            tweet_id: tweet_id_num
+      }
+
+      GenServer.cast(AeongCounter, payload)
     end
   end
 
