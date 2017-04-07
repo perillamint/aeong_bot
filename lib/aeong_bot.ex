@@ -19,7 +19,7 @@ defmodule AeongBot do
   def start(type, args) do
     config = %{
       twitter_stream: %{
-        filter_user: ~r/(IfElse__|perillamint)/,
+        filter_user: ~r/(IfElseAeongBot)/,
         filter_keyword: ~r/애옹/
       },
       aeong_action: %{
