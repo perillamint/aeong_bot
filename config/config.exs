@@ -28,3 +28,9 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+try do
+  import_config("twitter_credential.exs")
+rescue
+  Mix.Config.LoadError -> :twitter_config_error
+end
