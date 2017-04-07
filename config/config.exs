@@ -29,4 +29,9 @@ use Mix.Config
 #
 #     import_config "#{Mix.env}.exs"
 
+try do
 import_config "twitter_credential.exs"
+rescue
+# Do nothing
+end
+
