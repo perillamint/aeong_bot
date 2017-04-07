@@ -28,6 +28,6 @@ defmodule AeongCounter.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:extwitter, "~> 0.8.3"}]
   end
 end
