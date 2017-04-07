@@ -14,10 +14,13 @@ defmodule AeongBot do
 
   """
   def hello do
-    :world
-  end
+    :world  end
 
   def start(type, args) do
-    AeongSupervisor.start_link()
+    config = %{
+      twitter_stream: %{}
+    }
+
+    AeongSupervisor.start_link(config)
   end
 end

@@ -7,7 +7,7 @@ defmodule AeongSupervisor do
   end
 
   def init(args) do
-    childs = [worker(TwitterStream, [args.twitterstream], [])]
+    childs = [worker(TwitterStream, [args.twitter_stream], [])]
 
     supervise(childs, [
           {:strategy, :one_for_one},
