@@ -1,8 +1,8 @@
-defmodule AeongCounter.Mixfile do
+defmodule AeongBot.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :aeong_counter,
+    [app: :aeong_bot,
      version: "0.1.0",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,

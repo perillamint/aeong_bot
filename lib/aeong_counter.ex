@@ -1,6 +1,6 @@
-defmodule AeongCounter do
+defmodule AeongBot do
   @moduledoc """
-  Documentation for AeongCounter.
+  Documentation for AeongBot.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule AeongCounter do
 
   ## Examples
 
-      iex> AeongCounter.hello
+      iex> AeongBot.hello
       :world
 
   """
