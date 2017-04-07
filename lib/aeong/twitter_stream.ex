@@ -76,8 +76,8 @@ defmodule AeongBot.Aeong.TwitterStream do
     text = HtmlEntities.decode(htmltext);
 
     # Filter out users and keyworkds
-    if Regex.match?(state.filter_user, screen_name) &&
-      Regex.match?(state.filter_keyword, text) &&
+    #if Regex.match?(state.filter_user, screen_name) &&
+    if Regex.match?(state.filter_keyword, text) &&
       nil == twt.retweeted_status do
       {user_id_num, ""} = Integer.parse(user_id)
       {tweet_id_num, ""} = Integer.parse(tweet_id)
