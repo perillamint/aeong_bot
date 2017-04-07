@@ -1,4 +1,5 @@
 # AeongCounter
+[![Build Status](https://travis-ci.org/perillamint/aeong_counter.svg?branch=master)](https://travis-ci.org/perillamint/aeong_counter)
 
 **TODO: Add description**
 
