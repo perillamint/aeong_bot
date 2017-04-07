@@ -14,6 +14,9 @@ defmodule AeongBot.Aeong.TwitterStream do
       |> Enum.take_while(fn (data) ->
         GenServer.cast(parent, data)
       end)
+
+      # Keep looping
+      start(parent)
     end
   end
 
