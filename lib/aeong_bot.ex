@@ -1,4 +1,5 @@
 defmodule AeongBot do
+  use Application
   @moduledoc """
   Documentation for AeongBot.
   """
@@ -14,5 +15,9 @@ defmodule AeongBot do
   """
   def hello do
     :world
+  end
+
+  def start(type, args) do
+    AeongSupervisor.start_link()
   end
 end
