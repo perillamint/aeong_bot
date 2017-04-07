@@ -10,7 +10,7 @@ defmodule AeongBot.Aeong.TwitterStream do
 
   defmodule StreamListener do
     def start(parent) do
-      ExTwitter.stream_user()
+      ExTwitter.stream_user([{:replies, "all"}])
       |> Enum.take_while(fn (data) ->
         GenServer.cast(parent, data)
       end)
