@@ -1,5 +1,7 @@
 defmodule AeongBot.Aeong.TwitterStream do
   use GenServer
+  alias ExTwitter.Model.Tweet, as: Tweet
+  alias ExTwitter.Model.User, as: User
 
   defmodule State do
     defstruct [:twitter]
@@ -18,10 +20,14 @@ defmodule AeongBot.Aeong.TwitterStream do
     GenServer.start_link(__MODULE__, [args], [])
   end
 
-  def init(args) do
+  def init([config]) do
     state = %{
-      extwitter: :undefined
+      filter_user: :undefined,
+      filter_keyword: :undefined
     }
+
+    state = %{state | filter_user: config.filter_user}
+    state = %{state | filter_keyword: config.filter_keyword}
 
     spawn_link(StreamListener, :start, [self()])
 
@@ -32,8 +38,8 @@ defmodule AeongBot.Aeong.TwitterStream do
     {:stop, {:error, :unknownmsg}, state}
   end
 
-  def handle_cast(msg, state) do
-    IO.inspect(msg)
+  def handle_cast(tweet, state) do
+    handle_tweet(tweet, state)
     {:noreply, state}
   end
 
@@ -47,5 +53,32 @@ defmodule AeongBot.Aeong.TwitterStream do
 
   def code_change(oldvsn, state, extr) do
     {:ok, state}
+  end
+
+  defp handle_tweet({:friends, friends}, state) do
+    :ok
+  end
+
+  defp handle_tweet(twt = %Tweet{}, state) do
+    %Tweet{
+      text: htmltext,
+      user: %User{
+        screen_name: screen_name,
+        id_str: user_id
+      },
+      id_str: tweet_id
+    } = twt
+
+    text = HtmlEntities.decode(htmltext);
+
+    # Filter out users and keyworkds
+    if Regex.match?(state.filter_user, screen_name) &&
+      Regex.match?(state.filter_keyword, text) do
+      IO.puts("Aeong")
+    end
+  end
+
+  defp handle_tweet(_, state) do
+    :ok
   end
 end

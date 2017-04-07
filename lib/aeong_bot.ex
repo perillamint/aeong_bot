@@ -18,7 +18,10 @@ defmodule AeongBot do
 
   def start(type, args) do
     config = %{
-      twitter_stream: %{}
+      twitter_stream: %{
+        filter_user: ~r/(IfElse__|perillamint)/,
+        filter_keyword: ~r/애옹/
+      }
     }
 
     AeongSupervisor.start_link(config)
