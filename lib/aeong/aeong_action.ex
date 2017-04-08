@@ -19,8 +19,10 @@ defmodule AeongBot.Aeong.AeongAction do
 
   def handle_cast(aeong, state) do
     if 0 == rem(aeong.count, state.celebrate_nth) do
-      msg = "@" <> aeong.screen_name <> " " <> Integer.to_string(aeong.count) <> "번째 애옹" <> UUID.uuid4()
-      ExTwitter.update(msg)
+      parent = Integer.to_string(aeong.parent)
+      msg = Integer.to_string(aeong.count) <> "번째 애옹 " <> UUID.uuid4()
+      tweet = "@" <> aeong.screen_name <> " " <> msg
+      ExTwitter.update(tweet, [{:in_reply_to_status_id, parent}])
     end
 
     {:noreply, state}

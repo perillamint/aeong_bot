@@ -16,13 +16,13 @@ defmodule AeongBot.Aeong.AeongCounter do
     {:stop, {:error, :unknownmsg}, state}
   end
 
-  def handle_cast(aeong, state) do
+  def handle_cast(aeongtwt, state) do
     aeong = Amnesia.transaction do
-      aeong = case AeongCount.read(aeong.user_id) do
+      aeong = case AeongCount.read(aeongtwt.user_id) do
                 nil ->
                   %AeongCount{
-                    twitter_user_id: aeong.user_id,
-                    screen_name: aeong.screen_name,
+                    twitter_user_id: aeongtwt.user_id,
+                    screen_name: aeongtwt.screen_name,
                     count: 0
                   }
                 aeong_count ->
@@ -30,12 +30,11 @@ defmodule AeongBot.Aeong.AeongCounter do
               end
 
       aeong = %{aeong | count: aeong.count + 1}
-
       AeongCount.write(aeong)
     end
 
-    GenServer.cast(AeongAction, aeong)
-
+    action_payload = Map.put_new(aeong, :parent, aeongtwt.tweet_id)
+    GenServer.cast(AeongAction, action_payload)
     {:noreply, state}
   end
 
