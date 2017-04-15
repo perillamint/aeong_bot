@@ -32,6 +32,7 @@ defmodule AeongBot.Mixfile do
     [{:extwitter, "~> 0.8.3"},
      {:html_entities, "~> 0.3"},
      {:amnesia, "~> 0.2.7"},
-     {:uuid, "~> 1.1"}]
+     {:uuid, "~> 1.1"},
+     {:distillery, "~> 1.3"}]
   end
 end
