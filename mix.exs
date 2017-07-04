@@ -30,6 +30,7 @@ defmodule AeongBot.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:extwitter, "~> 0.8.3"},
+     {:hunter, "~> 0.4.1"},
      {:html_entities, "~> 0.3"},
      {:amnesia, "~> 0.2.7"},
      {:uuid, "~> 1.1"},
